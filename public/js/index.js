@@ -5,11 +5,7 @@ socket.on('connect', function(){
 
 
 
-  socket.emit('createMessage', {
-    from: "client",
-    message: "bonjour cher serveur!",
-    creatAt: 12345
-  })
+
 });
 
 

@@ -14,14 +14,16 @@ io.on('connect', (socket)=>{
   console.log('user is connected');
 
 
-  socket.emit('newMessage',{
-    from: "Server",
-    text:"Bonjour cher client!",
-    creatAt: 12333
-  });
+
 
  socket.on('createMessage', (message)=>{
    console.log('nouveau message de client', message);
+
+   io.emit('newMessage',{
+     from: message.from,
+     text:message.text,
+     creatAt: new Date().getTime()
+   });
  });
 
   socket.on('disconnect', (socket)=>{
