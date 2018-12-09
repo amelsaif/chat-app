@@ -13,17 +13,31 @@ var io= socketIO(server);
 io.on('connect', (socket)=>{
   console.log('user is connected');
 
-
+socket.emit('newMessage',{
+  from:"Admin",
+  text:"welcom to my chat app",
+  creatAt: new Date().getTime()
+});
+socket.broadcast.emit('newMessage',{
+  from:"Admin",
+  text:"new user connected",
+  creatAt: new Date().getTime()
+});
 
 
  socket.on('createMessage', (message)=>{
    console.log('nouveau message de client', message);
 
    io.emit('newMessage',{
-     from: message.from,
+   from: message.from,
      text:message.text,
      creatAt: new Date().getTime()
    });
+  //socket.broadcast.emit('newMessage',{
+     //from: message.from,
+     //text:message.text,
+    // creatAt: new Date().getTime()
+   //});
  });
 
   socket.on('disconnect', (socket)=>{
