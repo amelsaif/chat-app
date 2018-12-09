@@ -18,9 +18,10 @@ io.on('connect', (socket)=>{
   socket.broadcast.emit('newMessage',generateMessage('Admin', 'new user connected'));
 
 
- socket.on('createMessage', (message)=>{
+ socket.on('createMessage', (message, callback)=>{
    console.log('nouveau message de client', message);
    io.emit('newMessage',generateMessage(message.from, message.text));
+   callback('this is from the server');
   //socket.broadcast.emit('newMessage',{
      //from: message.from,
      //text:message.text,
